@@ -21,6 +21,8 @@ export default {
 
   methods: {
     handleDelete(id: number) {
+      console.log(121212212);
+      
       this.$emit("deleteTodo", id);
     },
     handleUpdate(id: number, isUpdate: boolean) {
