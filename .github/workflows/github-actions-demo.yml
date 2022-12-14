@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 12
-      - run: npm install
+          node-version: 14
       - uses: actions/checkout@v2
       - uses: reviewdog/action-eslint@v1
+      - run: yarn install
         with:
           github_token: ${{ secrets.TOKEN }}
           reporter: github-pr-review
