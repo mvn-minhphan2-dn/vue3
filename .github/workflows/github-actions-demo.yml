@@ -8,17 +8,16 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: npm
       - run: npm ci
-      - uses: actions/checkout@v2
       - uses: reviewdog/action-eslint@v1
         with:
           # github_token: ${{ secrets.TOKEN }}
-          reporter: github-check
+          reporter: github-pr-review
           eslint_flags: 'src/'
       - run: yarn lint
 
