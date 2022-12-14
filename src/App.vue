@@ -47,8 +47,10 @@ export default defineComponent({
     });
     const todoss = useTodoStore();
     console.log(todoss.getListTodos);
-    console.log(todoss);
 
+
+
+    
     let todos: any = computed(function () {
       return store.getters[`${module}/getListTodos`];
     });
