@@ -1,8 +1,8 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
-  pull_request:
   push:
+  pull_request:
     branches:
       - master
       - develop
@@ -14,14 +14,17 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-      - run: yarn install
+          cache: npm
       - run: npm ci
+      - name: install node
+        run: yarn install
       - uses: actions/checkout@v2
       - uses: reviewdog/action-eslint@v1
         with:
           # github_token: ${{ secrets.TOKEN }}
           reporter: github-pr-review
           eslint_flags: 'src/'
-      - run: yarn lint
+      - name: check lint
+        run: yarn lint
 
 # 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
