@@ -1,33 +1,28 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on:
+on: 
   pull_request:
   push:
     branches:
       - master
       - develop
-permissions:
-  contents: read
-  pull-requests: read
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 14, 16, 18 ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14
-          cache: npm
-
-      - name: Install
-        run: npm ci
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - uses: actions/checkout@v2
       - uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{ secrets.TOKEN }}
           reporter: github-pr-review
-          eslint_flags: "src/"
+          eslint_flags: 'src/'
 
 # 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
