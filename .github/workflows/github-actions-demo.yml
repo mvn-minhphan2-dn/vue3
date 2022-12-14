@@ -9,9 +9,6 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ 14, 16, 18 ]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -25,6 +22,6 @@ jobs:
           # github_token: ${{ secrets.TOKEN }}
           reporter: github-pr-review
           eslint_flags: 'src/'
-          run: yarn lint
+      - run: yarn lint
 
 # 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
