@@ -3,10 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "lint-staged": {
-    "src/**/*.{vue,ts,tsx,js,jsx}": [
-      "lint . --fix",
-      "git add"
-    ],
+    "src/**/*.{vue,ts,tsx,js,jsx}": "lint",
     "src/**/*.scss": [
       "stylelint --syntax scss --fix",
       "git add"
