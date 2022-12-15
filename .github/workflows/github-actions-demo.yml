@@ -1,19 +1,22 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push, pull_request]
+on: 
+  push:
+  pull_request:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: npm ci
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: npm
-      - run: npm ci
+      - run: npm install
       - uses: reviewdog/action-eslint@v1
         with:
-          # github_token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.TOKEN }}
           reporter: github-pr-review
           eslint_flags: 'src/'
       - run: yarn lint
