@@ -1,5 +1,3 @@
-import todos from "@/data/index.json";
-
 const state = () => ({
   todos: [],
   isUpdate: null,
