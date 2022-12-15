@@ -25,4 +25,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           eslint_flags: 'src/'
-# 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

@@ -23,11 +23,12 @@
     "lint:scss:fix": "stylelint 'src/**/*.scss' --syntax scss --fix",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "prettier": "prettier --write \"src/**/*.{vue,js,ts,tsx}\""
+    "prettier": "prettier --write \"src/**/*.{vue,js,ts,tsx}\"",
+    "prepare": "husky install"
   },
-  "pre-commit": "lint-staged",
   "dependencies": {
     "@vueuse/core": "^9.6.0",
+    "husky-init": "^8.0.0",
     "pinia": "^2.0.26",
     "pinia-plugin-persist": "^1.0.0",
     "sass": "^1.56.2",
