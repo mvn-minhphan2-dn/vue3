@@ -49,8 +49,8 @@ export default defineComponent({
     let todos: any = computed(function () {
       return store.getters[`${module}/getListTodos`];
     });
-    console.log(todoss.getListTodos);
     function addTodo(): void {
+      console.log(todoss.getListTodos);
       const input = instance?.refs.inputField as HTMLInputElement;
       if (input.value) {
         const newData = {
