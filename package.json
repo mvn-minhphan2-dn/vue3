@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "lint-staged": {
-    "src/**/*.{js,jsx}": [
+    "src/**/*.{vue,ts,tsx,js,jsx}": [
       "eslint . --fix", "git add"
     ],
     "src/**/*.scss": [
