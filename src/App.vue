@@ -50,7 +50,10 @@ export default defineComponent({
       return store.getters[`${module}/getListTodos`];
     });
     console.log(todoss.getListTodos);
+<<<<<<< HEAD
     
+=======
+>>>>>>> developv1
     function addTodo(): void {
       const input = instance?.refs.inputField as HTMLInputElement;
       if (input.value) {

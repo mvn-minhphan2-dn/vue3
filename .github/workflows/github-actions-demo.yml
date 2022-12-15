@@ -1,23 +1,37 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
+  push:
   pull_request:
+<<<<<<< HEAD
     branches:
       - master
+=======
+>>>>>>> developv1
 jobs:
-  Explore-GitHub-Actions:
+  eslint:
+    name: runner / eslint
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v2
         with:
-          node-version: "14"
-      - run: yarn install
-      - uses: actions/checkout@v2
+          node-version: '16'
+      - name: Code Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run:  yarn install
       - uses: reviewdog/action-eslint@v1
         with:
-          github_token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           eslint_flags: 'src/'
 
-# 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
+      - name: Code Linting
+        run: yarn lint
+
+# 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
