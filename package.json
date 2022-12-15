@@ -4,7 +4,7 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier && npm run tslint:fix",
+      "pre-commit": " prettier && yarn lint:fix",
       "commit-msg": "commitlint -e $GIT_PARAMS"
     }
   },
