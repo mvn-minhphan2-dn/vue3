@@ -46,11 +46,10 @@ export default defineComponent({
       idTodoUpdate: 0,
     });
     const todoss = useTodoStore();
-    console.log(todoss.getListTodos);
-
     let todos: any = computed(function () {
       return store.getters[`${module}/getListTodos`];
     });
+    console.log(todoss.getListTodos);
     function addTodo(): void {
       const input = instance?.refs.inputField as HTMLInputElement;
       if (input.value) {
