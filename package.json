@@ -2,10 +2,17 @@
   "name": "vue3",
   "version": "0.0.0",
   "private": true,
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint . --fix", "git add"
+    ],
+    "src/**/*.scss": [
+      "stylelint --syntax scss --fix", "git add"
+    ]
+  },
   "husky": {
     "hooks": {
-      "pre-commit": " prettier && yarn lint:fix",
-      "commit-msg": "commitlint -e $GIT_PARAMS"
+      "pre-commit": "lint-staged"
     }
   },
   "scripts": {
@@ -13,6 +20,8 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
+    "lint:scss": "stylelint 'src/**/*.scss' --syntax scss",
+    "lint:scss:fix": "stylelint 'src/**/*.scss' --syntax scss --fix",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "prettier": "prettier --write \"src/**/*.{vue,js,ts,tsx}\""
