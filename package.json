@@ -4,10 +4,12 @@
   "private": true,
   "lint-staged": {
     "src/**/*.{vue,ts,tsx,js,jsx}": [
-      "eslint . --fix", "git add"
+      "lint . --fix",
+      "git add"
     ],
     "src/**/*.scss": [
-      "stylelint --syntax scss --fix", "git add"
+      "stylelint --syntax scss --fix",
+      "git add"
     ]
   },
   "husky": {
@@ -26,6 +28,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "prettier": "prettier --write \"src/**/*.{vue,js,ts,tsx}\""
   },
+  "pre-commit": "lint-staged",
   "dependencies": {
     "@vueuse/core": "^9.6.0",
     "pinia": "^2.0.26",
