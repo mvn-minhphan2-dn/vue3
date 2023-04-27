@@ -38,7 +38,7 @@ const pinia = createPinia()
   )
   .use(
     PiniaLogger({
-      expanded: false,
+      expanded: true,
       disabled: import.meta.env.mode === "production",
     })
   )

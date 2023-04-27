@@ -9,7 +9,7 @@
           ref="inputRef"
           @keyup.enter="handleAddOrUpdateTodo"
           type="text"
-          class="flex-1 px-2 py-1 text-black outline-0"
+          class="flex-1 px-2 py-1 text-black border-2 outline-0"
         />
         <button :class="styles" type="button" @click="handleAddOrUpdateTodo">
           {{ !todoStore.$state.idUpdate ? "Add" : "Update" }}
@@ -51,12 +51,12 @@ import Todo from "@/components/Todo.vue";
 import { useTodoStore } from "@/stores/todo.store";
 // import GuestBookService from "@/services/GuestBookService";
 import { storeToRefs } from "pinia";
-import { useQuery } from "@tanstack/vue-query";
+// import { useQuery } from "@tanstack/vue-query";
 import { useAuthStore } from "@/stores/auth.store";
 
 // eslint-disable-next-line prettier/prettier
 const styles =
-  "first:mr-4 py-1 px-2 ml-5 text-white border-2 hover:scale-105 hover:transition-all";
+  "first:mr-4 py-1 px-4 ml-5 text- border-2 bg-slate-700 text-white hover:scale-105 hover:transition-all";
 
 export default defineComponent({
   name: "Home",
