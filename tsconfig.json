@@ -8,8 +8,7 @@
     },
     "useUnknownInCatchVariables": false,
     "skipLibCheck": true,
-    "noImplicitAny": false,
-    "types": ["pinia-plugin-persist"]
+    "noImplicitAny": false
   },
   "references": [
     {

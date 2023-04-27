@@ -6,7 +6,7 @@ import VueAxios from "vue-axios";
 import { createPersistedState } from "pinia-plugin-persistedstate";
 import { PiniaLogger } from "pinia-logger";
 import { VueQueryPlugin } from "@tanstack/vue-query";
-import vue3GoogleLogin from "vue3-google-login";
+// import vue3GoogleLogin from "vue3-google-login";
 import VueVideoPlayer from "@videojs-player/vue";
 
 import App from "./App.vue";
@@ -46,9 +46,9 @@ const pinia = createPinia()
     store.router = markRaw(router);
   });
 const app = createApp(App).use(pinia).use(VueAxios, axios);
-app.use(vue3GoogleLogin, {
-  clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-  scope: "email profile",
-});
+// app.use(vue3GoogleLogin, {
+//   clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+//   scope: "email profile",
+// });
 app.use(VueVideoPlayer);
 app.use(router).use(VueQueryPlugin, vueQueryPluginOptions).mount("#app");
