@@ -1,7 +1,7 @@
 <template>
-  <li class="flex items-center justify-between pb-2 mb-2 border-b-2">
+  <li class="flex items-center justify-between pb-2 mb-2 border-b-2 last:mb-0">
     <router-link
-      class="text-red-500 hover:bg-transparent"
+      class="font-semibold text-red-500 hover:bg-transparent"
       :to="{ name: 'about', params: { id: todo.id } }"
     >
       {{ todo.name }}
@@ -17,7 +17,6 @@
       <button
         type="button"
         :class="styles"
-        class="hover:scale-105 hover:transition-all"
         @click="() => handleUpdate(todo.id, true)"
       >
         update
