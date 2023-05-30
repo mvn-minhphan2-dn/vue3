@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getToken } from "@/helpers/auth.helper";
+import { useAuthStore } from "@/stores/auth.store";
 const HomeView = () => import("@/views/HomeView.vue");
 const AboutView = () => import("@/views/AboutView.vue");
 const LoginView = () => import("@/views/features/login/LoginView.vue");
@@ -44,7 +45,8 @@ const router = createRouter({
 });
 // router.beforeEach(async (to, from, next) => {
 //   const isAuthenticated = await getToken();
-//   if (to.meta.requiresAuth && !isAuthenticated) next({ name: "login" });
+//   const { isLoggedIn } = useAuthStore();
+//   if (to.meta.requiresAuth && !isLoggedIn) next({ name: "login" });
 //   else next();
 // });
 

@@ -1,5 +1,5 @@
 <template>
-  <li class="flex items-center justify-between pb-2 mb-2 border-b-2">
+  <li class="flex items-center justify-between pb-2 mb-2 border-b-2 last:mb-0">
     <router-link
       class="font-semibold text-red-500 hover:bg-transparent"
       :to="{ name: 'about', params: { id: todo.id } }"

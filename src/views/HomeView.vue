@@ -3,7 +3,7 @@
     <h1 class="mb-10 text-[50px] font-extrabold underline text-red-500">
       Todo List
     </h1>
-    <section class="w-[30%]">
+    <section class="w-[50%] p-10 shadow-xl rounded-lg transition-all">
       <div class="flex mb-4">
         <input
           ref="inputRef"
@@ -24,15 +24,15 @@
         </button>
       </div>
       <div class="show-list">
-        <TransitionGroup name="list" tag="ul">
-          <Todo
-            v-for="(todo, index) in todos"
-            :todo="todo"
-            :key="index"
-            @handleRemove="(id) => remove(id)"
-            @handleUpdate="showInforUpdate"
-          />
-        </TransitionGroup>
+        <!-- <TransitionGroup name="list" tag="ul"> -->
+        <!-- </TransitionGroup> -->
+        <Todo
+          v-for="(todo, index) in todos"
+          :todo="todo"
+          :key="index"
+          @handleRemove="(id) => remove(id)"
+          @handleUpdate="showInfoUpdate"
+        />
       </div>
     </section>
   </div>
@@ -79,7 +79,7 @@ export default defineComponent({
 
     onMounted(async () => {});
 
-    function showInforUpdate(todoId: number) {
+    function showInfoUpdate(todoId: number) {
       let inputValue = inputRef?.value;
       const todoWithId = computed(() => {
         return getListTodos?.value?.find((todo: any) => todo.id === todoId);
@@ -101,11 +101,7 @@ export default defineComponent({
 
     watch(
       () => todoStore,
-      ({ getListTodos, $state }) => {
-        inputRef?.value && inputRef?.value!.focus();
-        console.log($state, "state changed");
-        console.log(getListTodos, "getterschanged");
-      },
+      ({getListTodos, $state}) => {},
       { deep: true }
     );
 
@@ -116,7 +112,7 @@ export default defineComponent({
     return {
       todoStore,
       todos: getListTodos,
-      showInforUpdate,
+      showInfoUpdate,
       guestBookData,
       inputRef,
       getMe,
