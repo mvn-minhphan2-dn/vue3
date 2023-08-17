@@ -7,11 +7,12 @@ import { createPersistedState } from "pinia-plugin-persistedstate";
 import { PiniaLogger } from "pinia-logger";
 import { VueQueryPlugin } from "@tanstack/vue-query";
 // import vue3GoogleLogin from "vue3-google-login";
-import VueVideoPlayer from "@videojs-player/vue";
+// import VueVideoPlayer from "@videojs-player/vue";
 
 import App from "./App.vue";
 import router from "./router";
 import "./assets/main.css";
+import store from "./store";
 
 const vueQueryPluginOptions = {
   queryClientConfig: {
@@ -45,10 +46,10 @@ const pinia = createPinia()
   .use(({ store }) => {
     store.router = markRaw(router);
   });
-const app = createApp(App).use(pinia).use(VueAxios, axios);
+const app = createApp(App).use(pinia).use(store).use(VueAxios, axios);
 // app.use(vue3GoogleLogin, {
 //   clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
 //   scope: "email profile",
 // });
-app.use(VueVideoPlayer);
+// app.use(VueVideoPlayer);
 app.use(router).use(VueQueryPlugin, vueQueryPluginOptions).mount("#app");

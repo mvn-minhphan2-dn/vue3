@@ -26,5 +26,5 @@ export const useAuthStore = defineStore("auth", {
       router.push("/");
     },
   },
-  persist: false,
+  persist: true,
 });
