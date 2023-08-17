@@ -11,6 +11,7 @@
         type="button"
         :class="styles"
         @click="() => handleRemove(todo.id)"
+        :disabled="isDisabled"
       >
         delete
       </button>
@@ -18,6 +19,7 @@
         type="button"
         :class="styles"
         @click="() => handleUpdate(todo.id, true)"
+        :disabled="isDisabled"
       >
         update
       </button>
@@ -26,26 +28,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onBeforeMount } from "vue";
 import { useTodoStore } from "@/stores/todo.store";
 
 // eslint-disable-next-line prettier/prettier
 const styles =
-  "first:mr-5 py-1 px-2 text-white rounded-sm bg-slate-700 hover:scale-105 hover:transition-all";
-
+  "first:mr-5 py-1 px-2 text-white rounded-sm bg-slate-700 hover:scale-105 hover:transition-all disabled:opacity-50 disabled:cursor-not-allowed";
+interface Todo {
+  name: string;
+  id: number;
+}
 export default defineComponent({
   name: "Todo",
-  props: ["todo"],
-  // emit: ["handleRemove", "handleUpdate"],
-  setup(_, { emit }) {
+  props: {
+    todo: {
+      type: Object as () => Todo,
+      required: true,
+    },
+    isDisabled: Boolean,
+  },
+  setup(props, { emit }) {
     // const emit = defineEmits<{
     //   (e: "handleRemove", id: number): void;
     //   (e: "handleUpdate", id: number, isUpdate: boolean): void;
     // }>();
     const todoStore = useTodoStore();
 
-    onMounted(() => {
-      // $reset();
+    onBeforeMount(() => {
+      todoStore.$reset();
     });
 
     function handleRemove(id: number) {

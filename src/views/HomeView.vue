@@ -3,36 +3,40 @@
     <h1 class="mb-10 text-[50px] font-extrabold underline text-red-500">
       Todo List
     </h1>
-    <section class="w-[50%] p-10 shadow-xl rounded-lg transition-all">
-      <div class="flex mb-4">
-        <input
-          ref="inputRef"
-          @keyup.enter="handleAddOrUpdateTodo"
-          type="text"
-          class="flex-1 px-2 py-1 text-black border-2 outline-0"
-        />
-        <button :class="styles" type="button" @click="handleAddOrUpdateTodo">
-          {{ !todoStore.$state.idUpdate ? "Add" : "Update" }}
-        </button>
-        <button
-          :class="styles"
-          type="button"
-          @click="handleCancel"
-          v-if="todoStore.$state.idUpdate"
-        >
-          Cancel
-        </button>
+    <section class="w-[50%] shadow-lg transition-all mb-5 rounded-lg">
+      <div class="p-10 rounded-lg border-t-[1px] shadow-custom border-x-[1px]">
+        <div class="flex mb-4">
+          <input
+            ref="inputRef"
+            @keyup.enter="handleAddOrUpdateTodo"
+            type="text"
+            class="flex-1 px-2 py-1 text-black border-2 outline-0"
+          />
+          <button :class="styles" type="button" @click="handleAddOrUpdateTodo">
+            {{ !todoStore.$state.idUpdate ? "Add" : "Update" }}
+          </button>
+          <button
+            :class="styles"
+            type="button"
+            @click="handleCancel"
+            v-if="todoStore.$state.idUpdate"
+          >
+            Cancel
+          </button>
+        </div>
+        <div class="show-list">
+          <Todo
+            v-for="(todo, index) in todos"
+            :todo="todo"
+            :key="index"
+            :isDisabled="!!todoStore.$state.idUpdate"
+            @handleRemove="(id) => remove(id)"
+            @handleUpdate="showInfoUpdate"
+          />
+        </div>
       </div>
-      <div class="show-list">
-        <!-- <TransitionGroup name="list" tag="ul"> -->
-        <!-- </TransitionGroup> -->
-        <Todo
-          v-for="(todo, index) in todos"
-          :todo="todo"
-          :key="index"
-          @handleRemove="(id) => remove(id)"
-          @handleUpdate="showInfoUpdate"
-        />
+      <div>
+        <button @click="increment">increment</button>
       </div>
     </section>
   </div>
@@ -41,7 +45,7 @@
 import {
   defineComponent,
   // reactive,
-  watch,
+  // watch,
   onMounted,
   ref,
   computed,
@@ -53,6 +57,7 @@ import { useTodoStore } from "@/stores/todo.store";
 import { storeToRefs } from "pinia";
 // import { useQuery } from "@tanstack/vue-query";
 import { useAuthStore } from "@/stores/auth.store";
+import { useStore } from "vuex";
 
 // eslint-disable-next-line prettier/prettier
 const styles =
@@ -65,6 +70,7 @@ export default defineComponent({
   },
   setup() {
     const todoStore = useTodoStore();
+    const store = useStore();
     const { add, remove, update, $reset } = todoStore;
     const { getListTodos } = storeToRefs(todoStore);
     const { getMe } = storeToRefs(useAuthStore());
@@ -75,9 +81,12 @@ export default defineComponent({
     // });
 
     const inputRef = ref<any>(null);
-    const guestBookData = ref<any>([]);
 
     onMounted(async () => {});
+
+    function increment() {
+      store.dispatch("todo/increment");
+    }
 
     function showInfoUpdate(todoId: number) {
       let inputValue = inputRef?.value;
@@ -99,11 +108,11 @@ export default defineComponent({
       $reset();
     }
 
-    watch(
-      () => todoStore,
-      ({getListTodos, $state}) => {},
-      { deep: true }
-    );
+    // watch(
+    //   () => todoStore,
+    //   ({ getListTodos, $state }) => {},
+    //   { deep: true }
+    // );
 
     watchEffect(() => {
       inputRef?.value && inputRef?.value!.focus();
@@ -113,13 +122,13 @@ export default defineComponent({
       todoStore,
       todos: getListTodos,
       showInfoUpdate,
-      guestBookData,
       inputRef,
       getMe,
       handleAddOrUpdateTodo,
       handleCancel,
       styles,
       remove,
+      increment,
       // fetchStatusGB,
       // dataGB,
     };

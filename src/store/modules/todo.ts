@@ -1,6 +1,7 @@
 const state = () => ({
-  todos: [],
+  todos: [] as any,
   isUpdate: null,
+  count: 0,
 });
 
 const getters = {
@@ -10,10 +11,10 @@ const getters = {
 };
 
 const mutations = {
-  addTodo(state: { todos: any[] }, item: any) {
+  addTodo(state: any, item: any) {
     state.todos.push(item);
   },
-  removeTodo(state: { todos: any[] }, payload: any) {
+  removeTodo(state: any, payload: any) {
     const index = state.todos.findIndex(
       (todo: { id: any }) => todo.id === payload
     );
@@ -24,6 +25,9 @@ const mutations = {
       (todo: { id: number }) => todo.id === payload?.todoId
     );
     return [(state.todos[index].name = payload.nameTodo)];
+  },
+  increment(state: any) {
+    state.count++;
   },
 };
 
@@ -36,6 +40,10 @@ const actions = {
   },
   updateTodo(context: any, payload: any) {
     context.commit("updateTodo", payload);
+  },
+  increment({ commit, state }) {
+    state.count++;
+    // commit("increment");
   },
 };
 
