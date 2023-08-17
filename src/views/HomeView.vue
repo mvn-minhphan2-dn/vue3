@@ -39,6 +39,7 @@
         <button @click="increment">increment</button>
       </div>
       <div></div>
+      <div></div>
     </section>
   </div>
 </template>
